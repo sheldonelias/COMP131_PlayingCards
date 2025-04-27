@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Deck
 {
@@ -20,6 +21,28 @@ public class Deck
         this.deckArr = createMasterDeckArr();
         this.deckArrList = createMasterDeckArrList();
     }
+
+
+    static ArrayList<Card> shuffleDeckArrList(Deck deck)
+    {
+        ArrayList<Card> shuffledPlayableDeck = new ArrayList<Card>(suits.length * ranks.length);
+
+        Random rand = new Random();
+
+        for(int i = 0; i < suits.length * ranks.length; i++)
+        {
+            int randNum = rand.nextInt(  deck.deckArrList.size()  );
+
+            shuffledPlayableDeck.add(  deck.deckArrList.get(randNum)  );
+
+            deck.deckArrList.remove(randNum);
+        }
+
+        deck.deckArrList = shuffledPlayableDeck;
+
+        return shuffledPlayableDeck;
+    }
+
 
     static Card[] createMasterDeckArr()
     {
